@@ -1,0 +1,41 @@
+while True:
+	print("I am working!")
+
+# -*- coding: utf-8 -*-
+import telebot
+import const
+import smtplib
+import time
+import codecs, sys
+from email.header import Header
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
+outf = codecs.getwriter('utf-8')(sys.stdout)
+print(outf, u'Привет!')
+
+bot = telebot.TeleBot(const.token)
+
+@bot.message_handler(commands=['start', 'help'])
+def handle_start_help(message):
+ answer = "Здравствуйте, я - автоматизированный бот.Я помогу вам с получением документов, необходимых для зачисления ребёнка в детский садик Катюша в городе Сковродино. Вот мои команды:"
+ bot.send_message(message.from_user.id, "Здравствуйте, я - автоматизированный бот.Я помогу вам с получением документов, необходимых для зачисления ребёнка в детский садик Катюша в городе Сковродино. Вот мои команды:")
+ from telebot import types
+ markup = types.ReplyKeyboardMarkup(True,False)
+ markup.row('привет','список')
+ #markup.row('привет', 'выход')
+ markup.row('документы', 'документы на почту')
+ bot.send_message(message.from_user.id, "документы - документы для поступления в формате PDF \n список - список, необходимых для поступления в детский садик документов \n отправка документов - отправка документов, для поступления в детский садик на указанную Вами почту в формате PDF \n", reply_markup=markup)
+ pass
+
+
+@bot.message_handler(content_types=["text"])
+
+def repeat_all_messages(message): # Название функции не играет никакой роли, в принципе
+ if message.text=="документы на почту":
+  send = bot.send_message(message.chat.id, 'На какой email отправить письмо?')
+  bot.register_next_step_handler(send, otpt)
+  #bot.send_message(message.chat.id,message.text)
+
+ elif message.text == "привет" or message.text == "ghbdtn":
