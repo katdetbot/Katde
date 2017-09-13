@@ -1,8 +1,11 @@
-import telebot
-import const
-import smtplib
-import time
-import codecs, sys
-from email.header import Header
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+certifi==2017.7.27.1
+chardet==3.0.4
+idna==2.6
+pew==0.1.26
+pipenv==5.2.0
+pyTelegramBotAPI==3.2.0
+pythonz-bd==1.11.4
+requests==2.18.4
+resumable-urlretrieve==0.1.5
+six==1.10.0
+urllib3==1.22
